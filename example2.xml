@@ -1,0 +1,25 @@
+<animes><!-- 主文件夹 -->
+    <kind><!-- 一个大分类（第xx季动漫，小说，漫画……） -->
+        <kindname>动画</kindname><!-- 动画、漫画、电影、小说 -->
+        <season><season><!-- 第几季(defalut 1) -->
+        <!-- 各国语言名 -->
+        <cn_name></cn_name>
+        <en_name></en_name>
+        <jp_name></jp_name>
+        <!-- 开始结束时间，年.月.日 -->
+        <start_time></start_time>
+        <end_time></end_time>
+        <!-- 某一个文件夹 -->
+        <sub_file>
+            <kindname>本体</kindname><!--一个大分类下的小分类(动画：动画、pv、oped、封面图)-->
+            <name></name><!-- 现在文件夹名 -->
+            <lang></lang><!--语言（default：ja）-->
+            <sub_lang></sub_lang><!--语言（default：zh_cn）-->
+            <origin_name><!-- 原来文件夹情况（考虑天下文章一大抄，又可能有合并去重） -->
+                <from>dmhyrss\20220106</from><!-- 来自哪个目录 -->
+                <name></name><!-- 原来文件夹名 -->
+                <file_name>%[nowname]</file_name><!-- 现在文件夹和过去文件夹的变化 -->
+            </origin_name>
+        </sub_file>
+    </kind>
+</animes>
