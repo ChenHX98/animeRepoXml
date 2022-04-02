@@ -44,11 +44,11 @@ public class DocGenerater {
         boolean corn;
         do{
             addAkind(animes,document);
-            System.out.println("还要继续增加一个kind吗？（y/n）（0/1）");
+            System.out.println("还要继续增加一个kind吗？（y/n）（1/0）");
             String c=scan.nextLine();
             switch(c){
-                case "y", "0" ->corn=true;
-                case "n","1",""->corn=false;
+                case "y", "1" ->corn=true;
+                case "n","0",""->corn=false;
                 default -> corn=true;
             }
         }while(corn);
@@ -79,7 +79,7 @@ public class DocGenerater {
 
     private void addKindName(Element kindNode, Document document) {
         System.out.println("这是什么类型呢？");
-        System.out.println("1：动画\n2：轻小说\n3：漫画");
+        System.out.println("1：动画\n2：轻小说\n3：漫画\n4:音乐");
         Scanner scan=new Scanner(System.in);
         String kindname=scan.nextLine();
 
@@ -91,6 +91,7 @@ public class DocGenerater {
                     case "1"->kindname="动画";
                     case "2"->kindname="轻小说";
                     case "3"->kindname="漫画";
+                    case "4"->kindname="音乐";
                     default -> {
                         System.out.println("超出界限，请重新输入");
                         leag=false;
@@ -118,14 +119,14 @@ public class DocGenerater {
     private void addCnName(Element kindNode, Document document) {
         Scanner scan=new Scanner(System.in);
         outer:while(true){
-            System.out.println("这部动漫有中文名吗？");
+            System.out.println("这部动漫有中文名吗？（y=1，n=0，name）");
             String tnn=scan.nextLine();
             switch(tnn){
-                case "y", "0" -> {
+                case "y", "1" -> {
                     System.out.println("请输入这部动漫的中文名");
                     tnn=scan.nextLine();
                 }
-                case "n", "1", "" -> {
+                case "n", "0", "" -> {
                     break outer;
                 }
                 default -> {
@@ -143,14 +144,14 @@ public class DocGenerater {
         Scanner scan=new Scanner(System.in);
 
         outer:while(true){
-            System.out.println("这部动漫有英文名吗？");
+            System.out.println("这部动漫有英文名吗？（y=1，n=0，name）");
             String tnn=scan.nextLine();
             switch(tnn){
-                case "y", "0" -> {
+                case "y", "1" -> {
                     System.out.println("请输入这部动漫的英文名");
                     tnn=scan.nextLine();
                 }
-                case "n", "1", "" -> {
+                case "n", "0", "" -> {
                     break outer;
                 }
                 default -> {
@@ -168,14 +169,14 @@ public class DocGenerater {
 
 
         outer:while(true){
-            System.out.println("这部动漫有日文名吗？（y=0，n=1，name）");
+            System.out.println("这部动漫有日文名吗？（y=1，n=0，name）");
             String tnn=scan.nextLine();
             switch(tnn){
-                case "y", "0" -> {
+                case "y", "1" -> {
                     System.out.println("请输入这部动漫的日文名");
                     tnn=scan.nextLine();
                 }
-                case "n", "1", "" -> {
+                case "n", "0", "" -> {
                     break outer;
                 }
                 default -> {
@@ -211,11 +212,11 @@ public class DocGenerater {
         boolean corn;
         do{
             addASubFile(kindNode,document);
-            System.out.println("还要继续添加sub_file吗？（y/n）（0/1）");
+            System.out.println("还要继续添加sub_file吗？（y=1，n=0）");
             String c=scan.nextLine();
             switch(c){
-                case "y", "0" ->corn=true;
-                case "n","1"->corn=false;
+                case "y", "1" ->corn=true;
+                case "n","0"->corn=false;
                 default -> corn=false;
             }
         }while(corn);
@@ -237,13 +238,7 @@ public class DocGenerater {
         System.out.println("请输入文件名？");
         String dirName=scan.nextLine();
 
-        Element subFileKindName=document.createElement("kindname");
-        subFileKindName.setTextContent(kindname);
-        subFileNode.appendChild(subFileKindName);
 
-        Element dirNameNode=document.createElement("name");
-        dirNameNode.setTextContent(dirName);
-        subFileNode.appendChild(dirNameNode);
 
         boolean leag=false;
         while(!leag){
@@ -288,6 +283,10 @@ public class DocGenerater {
         Element kindNameNode=document.createElement("kind_name");
         kindNameNode.setTextContent(kindname);
         subFileNode.appendChild(kindNameNode);
+
+        Element dirNameNode=document.createElement("name");
+        dirNameNode.setTextContent(dirName);
+        subFileNode.appendChild(dirNameNode);
     }
 
     private void donghua(Element subFileNode, Document document) {
@@ -302,12 +301,16 @@ public class DocGenerater {
         subFileNode.appendChild(langNode);
 
         outer:while (true){
-            System.out.println("有字幕吗？(y=0,n=1,字幕def:zh_cn)");
+            System.out.println("有字幕吗？(y=1,n=0,字幕def:zh_cn)");
             String subLang=scan.nextLine();
             switch (subLang){
                 case ""-> subLang="zh_cn";
-                case "n", "1" -> {
+                case "n", "0" -> {
                     break outer;
+                }
+                case "y", "1"->{
+                    System.out.println("请输入");
+                    subLang=scan.nextLine();
                 }
                 default -> {
                     ;
@@ -323,19 +326,26 @@ public class DocGenerater {
 
     private void zimu(Element subFileNode, Document document) {
         Scanner scan=new Scanner(System.in);
-        System.out.println("什么语言的字幕？");
-        String subLang=scan.nextLine();
-        switch (subLang){
-            case ""-> subLang="zh_cn";
-            case "n", "1" -> {
+        outer:while (true){
+            System.out.println("什么语言的字幕？(y=1,n=0,字幕def:zh_cn)");
+            String subLang=scan.nextLine();
+            switch (subLang){
+                case ""-> subLang="zh_cn";
+                case "n", "0" -> {
+                    break outer;
+                }
+                case "y", "1"->{
+                    System.out.println("请输入");
+                    subLang=scan.nextLine();
+                }
+                default -> {
+                    ;
+                }
             }
-            default -> {
-                ;
-            }
+            Element subLangNode=document.createElement("sub_lang");
+            subLangNode.setTextContent(subLang);
+            subFileNode.appendChild(subLangNode);
         }
-        Element subLangNode=document.createElement("sub_lang");
-        subLangNode.setTextContent(subLang);
-        subFileNode.appendChild(subLangNode);
 
         addSubFileOrignNames(subFileNode,document);
     }
@@ -360,12 +370,16 @@ public class DocGenerater {
         subFileNode.appendChild(langNode);
 
         outer:while (true){
-            System.out.println("有歌词吗？什么语言(y=0,n=1,字幕def:zh_cn)");
+            System.out.println("有歌词吗？什么语言(y=1,n=0,字幕def:zh_cn)");
             String subLang=scan.nextLine();
             switch (subLang){
                 case ""-> subLang="zh_cn";
-                case "n", "1" -> {
+                case "n", "0" -> {
                     break outer;
+                }
+                case "y", "1"->{
+                    System.out.println("请输入");
+                    subLang=scan.nextLine();
                 }
                 default -> {
                     ;
@@ -404,12 +418,16 @@ public class DocGenerater {
         subFileNode.appendChild(langNode);
 
         outer:while (true){
-            System.out.println("有歌词吗？什么语言(y=0,n=1,字幕def:zh_cn)");
+            System.out.println("有歌词吗？什么语言(y=1,n=0,字幕def:zh_cn)");
             String subLang=scan.nextLine();
             switch (subLang){
                 case ""-> subLang="zh_cn";
-                case "n", "1" -> {
+                case "n", "0" -> {
                     break outer;
+                }
+                case "y", "1"->{
+                    System.out.println("请输入");
+                    subLang=scan.nextLine();
                 }
                 default -> {
                     ;
@@ -427,11 +445,11 @@ public class DocGenerater {
         boolean corn;
         do{
             addSubFileOrignName(subFileNode,document);
-            System.out.println("还要增加原文件夹吗？（y/n）（0/1）");
+            System.out.println("还要增加原文件夹吗？（y=1，n=0）");
             String c=scan.nextLine();
             switch(c){
-                case "y", "0" ->corn=true;
-                case "n","1"->corn=false;
+                case "y", "1" ->corn=true;
+                case "n","0"->corn=false;
                 default -> corn=false;
             }
         }while(corn);
@@ -441,7 +459,7 @@ public class DocGenerater {
         Element originNameNode=document.createElement("origin_name");
         
         addOriginNameFrom(originNameNode,document);
-        addOriginNameName(originNameNode,document);
+        //addOriginNameName(originNameNode,document);
         addOriginNameNowName(originNameNode,document);
 
         subFileNode.appendChild(originNameNode);
@@ -478,7 +496,7 @@ public class DocGenerater {
         if(dir.equals("")){
             dir="%[nowname]";
         }
-        Element name=document.createElement("name");
+        Element name=document.createElement("file_name");
         name.setTextContent(dir);
         originNameNode.appendChild(name);
     }

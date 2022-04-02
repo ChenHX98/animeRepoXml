@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<animes>
+    <kind>
+        <kind_name>动画</kind_name>
+        <season>1</season>
+        <cn_name>测试</cn_name>
+        <start_time>00</start_time>
+        <end_time>00</end_time>
+        <sub_file>
+            <lang>22</lang>
+            <sub_lang>23</sub_lang>
+            <sub_lang>f</sub_lang>
+            <sub_lang>zh_cn</sub_lang>
+            <origin_name>
+                <from>dmhyrss\20220106</from>
+                <name>%[subfile_name]</name>
+                <name>%[nowname]</name>
+            </origin_name>
+            <kind_name>动画</kind_name>
+            <name/>
+        </sub_file>
+    </kind>
+</animes>
