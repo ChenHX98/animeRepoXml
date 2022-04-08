@@ -41,6 +41,8 @@ public class DocGenerater {
 
         Element animes=document.createElement("animes");
 
+        addAurl(animes,document);
+
         boolean corn;
         do{
             addAkind(animes,document);
@@ -59,6 +61,19 @@ public class DocGenerater {
         transformer.setOutputProperty(OutputKeys.INDENT,"yes");
         transformer.transform(new DOMSource(document),new StreamResult(new File(dir,"animeInfo.xml")));
 
+    }
+
+    private void addAurl(Element animes, Document document) {
+        Scanner scan=new Scanner(System.in);
+        System.out.println("请输入资料来源,回车退出");
+        String url=scan.nextLine();
+        while(!url.equals("")){
+            Element urlNode=document.createElement("url");
+            urlNode.setTextContent(url);
+            animes.appendChild(urlNode);
+            System.out.println("请输入资料来源,回车退出");
+            url=scan.nextLine();
+        }
     }
 
     private void addAkind(Element animesNode, Document document) {
