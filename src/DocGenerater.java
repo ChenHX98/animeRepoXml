@@ -114,6 +114,7 @@ public class DocGenerater {
                     default -> {
                         System.out.println("超出界限，请重新输入");
                         leag=false;
+                        kindname=scan.nextLine();
                     }
                 }
             }
@@ -254,8 +255,7 @@ public class DocGenerater {
         System.out.println("这是什么类型呢？");
         System.out.println("0:退出\n1：动画\n2：oped\n3：整体预告(pv)\n4：分级预告\n5：特典\n6：ova\n7：menu\n8：动画宣传\n9：字幕\n10：ost\n11：相关图片\n12：音乐\n13：演唱会\n14：Extra Clip from DVD（额外片段）\n15：其他");
         String kindname=scan.nextLine();
-        System.out.println("请输入文件名？");
-        String dirName=scan.nextLine();
+
 
 
 
@@ -329,11 +329,14 @@ public class DocGenerater {
                     }
                     default -> {
                         System.out.println("超出界限，请重新输入");
+                        kindname=scan.nextLine();
                         leag=false;
                     }
                 }
             }
         }
+        System.out.println("请输入文件名？");
+        String dirName=scan.nextLine();
         Element kindNameNode=document.createElement("kind_name");
         kindNameNode.setTextContent(kindname);
         subFileNode.appendChild(kindNameNode);
@@ -452,7 +455,7 @@ public class DocGenerater {
         subFileNode.appendChild(langNode);
 
         outer:while (true){
-            System.out.println("有歌词吗？什么语言(y=1,n=0,字幕def:zh_cn)");
+            System.out.println("有歌词吗？什么语言(y=1,n=0,zh_cn=2,zh_tw=3,ja=4,en=5,def:zh_cn");
             String subLang=scan.nextLine();
             switch (subLang){
                 case ""-> subLang="zh_cn";
